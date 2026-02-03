@@ -207,4 +207,4 @@ Track your progress as you complete each project:
 
 ## License
 
-MIT
+LGPL-2.1 license
