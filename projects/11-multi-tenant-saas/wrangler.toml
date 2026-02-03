@@ -1,0 +1,52 @@
+name = "multi-tenant-saas"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# D1 Database
+# Run: npx wrangler d1 create multi-tenant-saas
+# Run: npx wrangler d1 execute multi-tenant-saas --file=schema.sql
+
+[[d1_databases]]
+binding = "DB"
+database_name = "multi-tenant-saas"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# KV for caching
+# Run: npx wrangler kv:namespace create CACHE
+# Run: npx wrangler kv:namespace create CACHE --preview
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "YOUR_KV_NAMESPACE_ID"
+preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID"
+
+# R2 for file storage
+# Run: npx wrangler r2 bucket create tenant-files
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "tenant-files"
+
+# Queues for background jobs
+# Run: npx wrangler queues create background-jobs
+
+[[queues.producers]]
+queue = "background-jobs"
+binding = "JOBS"
+
+[[queues.consumers]]
+queue = "background-jobs"
+max_batch_size = 10
+max_batch_timeout = 30
+
+[vars]
+# For local development only
+JWT_SECRET = "dev-jwt-secret-change-in-production"
+
+# Secrets (set via wrangler secret put)
+# npx wrangler secret put JWT_SECRET
+# npx wrangler secret put STRIPE_SECRET_KEY
+# npx wrangler secret put STRIPE_WEBHOOK_SECRET

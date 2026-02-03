@@ -1,0 +1,18 @@
+{
+  "name": "07-webhook-relay",
+  "version": "1.0.0",
+  "description": "Webhook ingestion and delivery with Queues",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "db:init": "wrangler d1 execute webhook-relay --file=schema.sql",
+    "db:init:local": "wrangler d1 execute webhook-relay --local --file=schema.sql"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240117.0",
+    "typescript": "^5.3.3",
+    "wrangler": "^3.24.0"
+  }
+}

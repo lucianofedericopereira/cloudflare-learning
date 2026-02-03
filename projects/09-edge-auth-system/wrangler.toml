@@ -1,0 +1,24 @@
+name = "edge-auth-system"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# D1 Database
+# Run: npx wrangler d1 create edge-auth
+# Run: npx wrangler d1 execute edge-auth --file=schema.sql
+
+[[d1_databases]]
+binding = "DB"
+database_name = "edge-auth"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# Secrets (set via wrangler secret put)
+# npx wrangler secret put JWT_SECRET
+# npx wrangler secret put REFRESH_SECRET
+
+[vars]
+# For local development only (use secrets in production)
+JWT_SECRET = "dev-jwt-secret-change-in-production"
+REFRESH_SECRET = "dev-refresh-secret-change-in-production"

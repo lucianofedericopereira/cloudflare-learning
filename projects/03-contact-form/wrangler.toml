@@ -1,0 +1,25 @@
+name = "contact-form"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# KV Namespace for submissions and rate limiting
+# Run: npx wrangler kv:namespace create SUBMISSIONS
+# Run: npx wrangler kv:namespace create SUBMISSIONS --preview
+
+[[kv_namespaces]]
+binding = "SUBMISSIONS"
+id = "YOUR_KV_NAMESPACE_ID"
+preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID"
+
+[vars]
+# Email configuration
+RECIPIENT_EMAIL = "your@email.com"
+SENDER_EMAIL = "noreply@yourdomain.com"
+# Admin key for viewing submissions (change this!)
+ADMIN_KEY = "change-this-admin-key"
+
+# Optional: Turnstile (Cloudflare CAPTCHA)
+# Run: npx wrangler secret put TURNSTILE_SECRET

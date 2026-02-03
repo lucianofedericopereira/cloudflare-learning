@@ -1,0 +1,18 @@
+name = "link-in-bio"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# D1 Database
+# Run: npx wrangler d1 create link-in-bio
+# Run: npx wrangler d1 execute link-in-bio --file=schema.sql
+
+[[d1_databases]]
+binding = "DB"
+database_name = "link-in-bio"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[vars]
+AUTH_TOKEN = "change-this-auth-token"

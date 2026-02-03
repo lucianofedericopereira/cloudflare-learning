@@ -1,0 +1,25 @@
+name = "realtime-chat"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# D1 Database
+# Run: npx wrangler d1 create realtime-chat
+# Run: npx wrangler d1 execute realtime-chat --file=schema.sql
+
+[[d1_databases]]
+binding = "DB"
+database_name = "realtime-chat"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# Durable Objects
+[durable_objects]
+bindings = [
+  { name = "CHAT_ROOM", class_name = "ChatRoom" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["ChatRoom"]

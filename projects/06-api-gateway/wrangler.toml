@@ -1,0 +1,30 @@
+name = "api-gateway"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# D1 Database
+# Run: npx wrangler d1 create api-gateway
+# Run: npx wrangler d1 execute api-gateway --file=schema.sql
+
+[[d1_databases]]
+binding = "DB"
+database_name = "api-gateway"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# KV for rate limiting
+# Run: npx wrangler kv:namespace create RATE_LIMIT
+# Run: npx wrangler kv:namespace create RATE_LIMIT --preview
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "YOUR_KV_NAMESPACE_ID"
+preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID"
+
+[vars]
+# Upstream API URL
+UPSTREAM_URL = "https://jsonplaceholder.typicode.com"
+# Admin key for management endpoints
+ADMIN_KEY = "change-this-admin-key"

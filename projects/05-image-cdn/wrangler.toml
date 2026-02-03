@@ -1,0 +1,21 @@
+name = "image-cdn"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# R2 Bucket
+# Run: npx wrangler r2 bucket create images
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "images"
+
+[vars]
+AUTH_TOKEN = "change-this-auth-token"
+
+# Optional: For presigned URLs (S3 compatibility)
+# Run: npx wrangler secret put R2_ACCESS_KEY_ID
+# Run: npx wrangler secret put R2_SECRET_ACCESS_KEY
+# ACCOUNT_ID = "your-cloudflare-account-id"

@@ -1,0 +1,33 @@
+name = "webhook-relay"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[dev]
+port = 8787
+
+# D1 Database
+# Run: npx wrangler d1 create webhook-relay
+# Run: npx wrangler d1 execute webhook-relay --file=schema.sql
+
+[[d1_databases]]
+binding = "DB"
+database_name = "webhook-relay"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# Queues
+# Run: npx wrangler queues create webhooks
+# Run: npx wrangler queues create webhooks-dlq
+
+[[queues.producers]]
+queue = "webhooks"
+binding = "WEBHOOK_QUEUE"
+
+[[queues.consumers]]
+queue = "webhooks"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+dead_letter_queue = "webhooks-dlq"
+
+[vars]
+ADMIN_KEY = "change-this-admin-key"

@@ -1,0 +1,16 @@
+name = "hello-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Development settings
+[dev]
+port = 8787
+local_protocol = "http"
+
+# Environment variables (non-secret)
+[vars]
+ENVIRONMENT = "development"
+
+# Uncomment for production deployment
+# [env.production]
+# vars = { ENVIRONMENT = "production" }
